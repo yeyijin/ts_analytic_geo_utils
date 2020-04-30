@@ -1,7 +1,7 @@
 /*
  * @Author: huangbaochen aka 3Gee <huangbaochenwo@live.come>
  * @Date: 2020-04-30 16:59:33
- * @LastEditTime: 2020-05-01 01:24:52
+ * @LastEditTime: 2020-05-01 02:19:35
  * @LastEditors: huangbaochen<huangbaochenwo@live.com>
  * @Description: 基本类
  * @如有问题，请联系维护人
@@ -33,15 +33,18 @@ export class LineSeg {
         this.end = end
     }
 
+    //欧几里得长度
     ecluid_length(): number {
         return Math.sqrt(Math.pow((this.start.x - this.end.x), 2) + 
             Math.pow((this.start.y- this.end.y), 2))
     }
     
+    //是否竖直
     is_vertical(): boolean {
         return this.start.x == this.end.x
     }
 
+    //是否水平
     is_horizon(): boolean {
         return this.start.y == this.end.y
     }
@@ -81,6 +84,18 @@ export class LineSeg {
             return this.start
         }
     }
+
+    //获取线段x范围
+    xrange(): NumberRange {
+        return new NumberRange(this.start.x, this.end.x)
+    }
+
+    //获取线段y范围
+    yrange(): NumberRange {
+        return new NumberRange(this.start.y, this.end.y)
+    }
+
+
 }
 
 export class circle {
@@ -97,6 +112,57 @@ export class circle {
     is_center_at_origin(): boolean {
         return this.center.is_origin()
     }
+}
+
+// 直线的Ax+By+C的表示
+export class LineFunctionMode {
+    A: number
+    B: number
+    C: number
+
+    constructor(A: number, B: number, C: number) {
+        if ((A != 0) && (B != 0)) {
+            this.A = 1
+            this.B = B / A
+            this.C = C / A
+        } else {
+            if (A == 0) {
+                this.A = 0
+                this.B = 1
+                this.C = C / B
+            } else {
+                this.A = 1
+                this.B = 0
+                this.C = C / A
+            }
+        }
+    }
+}
+
+export class NumberRange {
+    start: number
+    end: number
+
+    constructor(n1: number, n2: number) {
+        this.start = Math.min(n1, n2)
+        this.end = Math.max(n1, n2)
+    }
+
+    range(): number {
+        return this.end - this.start
+    }
+}
+
+//以Ax+By+C=0, x in (x1, x2)表示线段
+export class LineSegFunctionMode {
+    lf: LineFunctionMode
+    xrange: NumberRange
+    
+    constructor(lf: LineFunctionMode, xrange: NumberRange) {
+        this.lf = lf
+        this.xrange = xrange
+    }
+
 }
 
 /*
