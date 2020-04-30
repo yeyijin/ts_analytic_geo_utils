@@ -1,7 +1,7 @@
 /*
  * @Author: huangbaochen aka 3Gee <huangbaochenwo@live.come>
  * @Date: 2020-04-30 16:59:33
- * @LastEditTime: 2020-05-01 02:19:35
+ * @LastEditTime: 2020-05-01 02:22:21
  * @LastEditors: huangbaochen<huangbaochenwo@live.com>
  * @Description: 基本类
  * @如有问题，请联系维护人
@@ -151,16 +151,23 @@ export class NumberRange {
     range(): number {
         return this.end - this.start
     }
+
+    //是否是一个点
+    is_isolate(): boolean {
+        return this.end == this.start
+    }
 }
 
 //以Ax+By+C=0, x in (x1, x2)表示线段
 export class LineSegFunctionMode {
     lf: LineFunctionMode
     xrange: NumberRange
+    yrange: NumberRange
     
-    constructor(lf: LineFunctionMode, xrange: NumberRange) {
+    constructor(lf: LineFunctionMode, xrange: NumberRange, yrange: NumberRange) {
         this.lf = lf
         this.xrange = xrange
+        this.yrange = yrange
     }
 
 }
