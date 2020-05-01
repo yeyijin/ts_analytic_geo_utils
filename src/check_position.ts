@@ -1,13 +1,14 @@
 /*
  * @Author: huangbaochen aka 3Gee <huangbaochenwo@live.come>
  * @Date: 2020-04-30 10:54:03
- * @LastEditTime: 2020-05-01 01:57:31
+ * @LastEditTime: 2020-05-01 03:24:46
  * @LastEditors: huangbaochen<huangbaochenwo@live.com>
  * @Description: 检查位置
  * @如有问题，请联系维护人
  */
 
-import { Point, LineSeg } from './base_class'
+import { Point, LineSeg, LineFunctionMode } from './base_class'
+import { Matrix2x2 } from './linear_algebra'
 
 // 检查点是否在线段上
 export function is_point_in_lineseg(p: Point, l: LineSeg): boolean {
@@ -39,7 +40,24 @@ export function is_point_in_lineseg(p: Point, l: LineSeg): boolean {
     }
 }
 
-//判断两个线段是否相交
-export function is_linesegs_intersect(l1: LineSeg, l2: LineSeg): boolean {
-    return false
+//判断两个直线是否相交
+export function is_line_intersect(l1: LineFunctionMode, l2: LineFunctionMode): boolean {
+    const res_matrix = new Matrix2x2(l1.A, l1.B, l2.A, l2.B)
+    if (res_matrix.det() == 0) {
+        return false
+    } else {
+        return true
+    }
 }
+
+//给出两直线交点
+export function lines_intersect_point(l1: LineFunctionMode, l2: LineFunctionMode): any {
+    if (is_line_intersect(l1, l2)) {
+        const scale = new Matrix2x2(l1.A, l1.B, l2.A, l2.B).det()
+        const x = new Matrix2x2(l1.C, l1.B, l2.C, l2.B).det() / scale
+        const y = new Matrix2x2(l1.A, l1.C, l2.A, l2.C).det() / scale
+        return new Point(x, y)
+    }
+}
+
+//判断两线段是否相交
