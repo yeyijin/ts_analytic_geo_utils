@@ -1,6 +1,6 @@
 {
   "name": "ts_utils",
-  "version": "0.1.0",
+  "version": "0.1.0-beta",
   "description": "Some function using typescript compiler.",
   "main": "index.js",
   "author": "Huang Baochen",
