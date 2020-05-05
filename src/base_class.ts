@@ -1,7 +1,7 @@
 /*
  * @Author: huangbaochen aka 3Gee <huangbaochenwo@live.come>
  * @Date: 2020-04-30 16:59:33
- * @LastEditTime: 2020-05-05 16:54:01
+ * @LastEditTime: 2020-05-05 20:43:57
  * @LastEditors: huangbaochen<huangbaochenwo@live.com>
  * @Description: 基本类
  * @如有问题，请联系维护人
@@ -113,7 +113,7 @@ export class LineSeg {
 
 }
 
-export class circle {
+export class Circle {
     center: Point
     r: number
     d: number
@@ -204,6 +204,15 @@ export class Rectangle {
         this.node2 = new Point(x0, y0 + h * Math.cos(theta))
         this.node3 = new Point(x0 + h * Math.sin(theta) + w * Math.cos(theta), y0 + w * Math.sin(theta))
         this.node4 = new Point(x0 + w * Math.cos(theta), y0 + h * Math.cos(theta) + w * Math.sin(theta))
+    }
+
+    get_four_nodes (): Array<Point> {
+        return [
+            this.node1,
+            this.node2,
+            this.node3,
+            this.node4
+        ]
     }
 
     get_four_lineseg (): Array<LineSeg> {
