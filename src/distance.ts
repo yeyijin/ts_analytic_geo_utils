@@ -1,7 +1,7 @@
 /*
  * @Author: huangbaochen aka 3Gee <huangbaochenwo@live.come>
  * @Date: 2020-04-30 16:36:45
- * @LastEditTime: 2020-05-01 01:19:07
+ * @LastEditTime: 2020-05-05 21:15:20
  * @LastEditors: huangbaochen<huangbaochenwo@live.com>
  * @Description: 距离
  * @如有问题，请联系维护人
@@ -11,7 +11,7 @@ import { Point, LineSeg } from './base_class'
 /*
  * 计算p1和p2两点的欧几里得距离
 */
-function ecluid_distance(
+export function ecluid_distance(
         p1: Point,
         p2: Point
     ): number {
@@ -22,7 +22,7 @@ function ecluid_distance(
 /*
  * p到线段l的距离(可在延长线上)
 */
-function ecluid_distance_pl_inf(
+export function ecluid_distance_pl_inf(
         p: Point,
         l: LineSeg
     ): number {
@@ -46,9 +46,4 @@ function ecluid_distance_pl_inf(
         l.start.y * (l.end.x - l.start.x)
     ) / scale
     
-}
-
-export let distance: Object = {
-    ecluid_distance: ecluid_distance,
-    ecluid_distance_pl_inf: ecluid_distance_pl_inf
 }
