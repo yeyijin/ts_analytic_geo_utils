@@ -1,13 +1,13 @@
 /*
  * @Author: huangbaochen aka 3Gee <huangbaochenwo@live.come>
  * @Date: 2020-04-30 17:51:16
- * @LastEditTime: 2020-05-05 17:19:32
+ * @LastEditTime: 2020-05-05 21:54:49
  * @LastEditors: huangbaochen<huangbaochenwo@live.com>
  * @Description: 基本几何类测试
  * @如有问题，请联系维护人
  */
 
-import { Rectangle, Point, LineSeg, NumberRange } from '../src/base_class'
+import { Rectangle, Point, LineSeg, NumberRange, Circle } from '../src/base_class'
 
 const numberrange_1 = new NumberRange(1, 10)
 const numberrange_2 = new NumberRange(1, 1)
@@ -55,9 +55,37 @@ const point_test_1 = new Point(0, 0)
 const point_test_2 = new Point(1, 1)
 const point_test_3 = new Point(0, 1)
 
+const circle_origin = new Circle(new Point(0, 0), 34)
+
 const lineseg_test_1 = new LineSeg(point_test_1, point_test_2)
 const lineseg_test_2 = new LineSeg(point_test_2, point_test_3)
 const lineseg_test_3 = new LineSeg(point_test_3, point_test_1)
+
+
+test('circle_origin\'s center is at origin', () => {
+    expect(circle_origin.is_center_at_origin())
+        .toStrictEqual(true)
+})
+
+test('ls 1 top is (1, 1)', () => {
+    expect(lineseg_test_1.top())
+        .toStrictEqual(new Point(1, 1))
+})
+
+test('ls 1 bottom is (0, 0)', () => {
+    expect(lineseg_test_1.bottom())
+        .toStrictEqual(new Point(0, 0))
+})
+
+test('ls1 xrange is (0, 1)', () => {
+    expect(lineseg_test_1.xrange())
+        .toStrictEqual(new NumberRange(0, 1))
+})
+
+test('ls1 yrange is (0, 1)', () => {
+    expect(lineseg_test_1.yrange())
+        .toStrictEqual(new NumberRange(0, 1))
+})
 
 test('LineSeg(Point(0, 0), Point(1, 1))\'s length is sqrt(2)', () => {
     expect(Math.round((new LineSeg(new Point(0, 0), new Point(1, 1))).ecluid_length() * 100) / 100)
@@ -100,3 +128,15 @@ test('lineseg left test', () => {
     expect(lineseg_test_2.left()).toStrictEqual(point_test_3)
 });
 
+
+const rect1 = new Rectangle(new Point(0, 0), Math.sqrt(2), Math.sqrt(2), Math.PI / 4)
+
+console.log(Math.cos(Math.PI / 4))
+
+test('rect1 contain (-1, 0)', () => {
+    expect(
+        rect1
+            .get_four_nodes()
+            .map((p) => new Point(Math.round(p.x), Math.round(p.y))))
+    .toContainEqual(new Point(Math.round(-1), Math.round(0)))
+})
