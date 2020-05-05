@@ -1,7 +1,7 @@
 /*
  * @Author: huangbaochen aka 3Gee <huangbaochenwo@live.come>
  * @Date: 2020-04-30 16:59:33
- * @LastEditTime: 2020-05-01 02:22:21
+ * @LastEditTime: 2020-05-05 16:54:01
  * @LastEditors: huangbaochen<huangbaochenwo@live.com>
  * @Description: 基本类
  * @如有问题，请联系维护人
@@ -95,6 +95,21 @@ export class LineSeg {
         return new NumberRange(this.start.y, this.end.y)
     }
 
+    //返回对应的直线方程
+    funMode(): LineFunctionMode {
+        if (this.is_vertical()) {
+            const A = 1
+            const B = 0
+            const C = -this.start.x
+            return new LineFunctionMode(A, B, C)
+        } else {
+            const A = this.end.y - this.start.y
+            const B = this.start.x - this.end.x
+            const C = - this.start.x * (this.end.y - this.start.y) + this.start.y * (this.end.x - this.start.x)
+            return new LineFunctionMode(A, B, C)
+        }
+    }
+
 
 }
 
@@ -156,20 +171,11 @@ export class NumberRange {
     is_isolate(): boolean {
         return this.end == this.start
     }
-}
 
-//以Ax+By+C=0, x in (x1, x2)表示线段
-export class LineSegFunctionMode {
-    lf: LineFunctionMode
-    xrange: NumberRange
-    yrange: NumberRange
-    
-    constructor(lf: LineFunctionMode, xrange: NumberRange, yrange: NumberRange) {
-        this.lf = lf
-        this.xrange = xrange
-        this.yrange = yrange
+    //是否包含一个点
+    is_contain(n: number): boolean {
+        return (n >= this.start) && (n <= this.end)
     }
-
 }
 
 /*

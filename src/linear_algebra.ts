@@ -1,7 +1,7 @@
 /*
  * @Author: huangbaochen<huangbaochenwo@live.com>
  * @Date: 2020-05-01 02:24:12
- * @LastEditTime: 2020-05-01 02:32:16
+ * @LastEditTime: 2020-05-05 17:09:03
  * @LastEditors: huangbaochen<huangbaochenwo@live.com>
  * @Description: 常用线性代数模块
  * @FilePath: \save-myself-off-2019-ncovd:\Dropbox\xiaowanzi\project\ts_utils\src\linear_algebra.ts
@@ -24,6 +24,6 @@ export class Matrix2x2 {
 
     //矩阵对应的行列式的值
     det(): number {
-        return this.a * this.c - this.b * this.d
+        return this.a * this.d - this.b * this.c
     }
 }
